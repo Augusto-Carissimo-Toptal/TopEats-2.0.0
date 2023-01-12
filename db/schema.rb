@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_12_230208) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_12_231434) do
   create_table "addresses", force: :cascade do |t|
     t.string "address_field"
     t.datetime "created_at", null: false
@@ -29,6 +29,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_230208) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_customers_on_user_id"
+  end
+
+  create_table "menu_items", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "status"
+    t.float "total_price"
+    t.integer "customer_id", null: false
+    t.integer "courier_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["courier_id"], name: "index_orders_on_courier_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "user_addresses", force: :cascade do |t|
@@ -50,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_12_230208) do
 
   add_foreign_key "couriers", "users"
   add_foreign_key "customers", "users"
+  add_foreign_key "orders", "couriers"
+  add_foreign_key "orders", "customers"
   add_foreign_key "user_addresses", "addresses"
   add_foreign_key "user_addresses", "users"
 end

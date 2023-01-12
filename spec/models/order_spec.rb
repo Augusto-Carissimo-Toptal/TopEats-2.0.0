@@ -4,7 +4,9 @@ RSpec.describe Order do
   context 'validations' do
     subject {described_class.new(total_price: 4.4)}
 
-    it { should define_enum_for(:status).with(pending: 'pending', accepted: 'accepted', preparing: 'preparing',delivered: 'delivered').backed_by_column_of_type(:string) } 
+    it { should define_enum_for(:status)
+    .with_values(pending: 'pending', accepted: 'accepted', preparing: 'preparing',delivered: 'delivered')
+    .backed_by_column_of_type(:string) } 
 
     it { should validate_presence_of(:total_price) }
     
