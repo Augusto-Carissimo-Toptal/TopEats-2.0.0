@@ -1,11 +1,9 @@
 module Mutations
   class CreateUser < BaseMutation
-    # arguments passed to the `resolve` method
     argument :full_name, String, required: true
     argument :phone_number, String, required: true
     argument :email, String, required: true
 
-    # return type from the mutation
     type Types::UserType
 
     def resolve(full_name: nil, phone_number: nil, email: nil)
