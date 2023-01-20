@@ -1,14 +1,15 @@
 module Types
   class QueryType < Types::BaseObject
-    # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
-    include GraphQL::Types::Relay::HasNodeField
-    include GraphQL::Types::Relay::HasNodesField
 
-    field :all_customers, [CustomerType], null: false
+    field :all_users, [UserType], null: false
+    field :all_orders, [OrderType], null: false
 
-    def all_customers
-      Customer.all
+    def all_users
+      User.all
     end
 
+    def all_orders
+      Order.all
+    end
   end
 end
